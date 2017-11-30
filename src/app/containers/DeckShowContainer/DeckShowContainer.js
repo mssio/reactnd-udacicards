@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { DeckShow } from 'app/components'
 
 class DeckShowContainer extends Component {
-  static navigationOptions = {
-    title: 'New Deck Title',
-  }
-  
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.deck.get('title'),
+  })
+
   handleAddCard = () => {
     this.props.navigation.navigate('CardAdd')
   }
@@ -15,8 +15,10 @@ class DeckShowContainer extends Component {
   }
 
   render () {
+  const { deck } = this.props.navigation.state.params
     return (
       <DeckShow
+        deck={deck}
         onAddCard={this.handleAddCard}
         onShowQuiz={this.handleShowQuiz} />
     )

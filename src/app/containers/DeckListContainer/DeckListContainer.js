@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { DeckList } from 'app/components'
+import { data } from './tmp'
 
 class DeckListContainer extends Component {
-  handleOpenDeck = () => {
-    this.props.navigation.navigate('DeckShow')
+  handleOpenDeck = (deckId) => {
+    console.log('Entry opened:', deckId)
+    this.props.navigation.navigate('DeckShow', {
+      deck: data.get(deckId),
+    })
   }
 
   render () {
     return (
-      <DeckList onOpenDeck={this.handleOpenDeck} />
+      <DeckList
+        data={data.valueSeq()}
+        onOpenDeck={this.handleOpenDeck} />
     )
   }
 }

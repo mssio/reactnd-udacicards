@@ -1,21 +1,20 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View } from 'react-native'
+import { List, ListItem } from 'react-native-elements'
+import pluralize from 'pluralize'
 
-export default function DeckList ({ onOpenDeck }) {
-  return (
-    <View style={styles.container}>
-      <Text>Deck List</Text>
-      <TouchableOpacity onPress={onOpenDeck}>
-        <Text>Show Deck</Text>
-      </TouchableOpacity>
-    </View>
-  )
+export default function DeckList ({ data, onOpenDeck }) {
+  return (
+    <List>
+      {
+        data.map((entry, key) => (
+          <ListItem
+            key={key}
+            title={entry.get('title')}
+            subtitle={pluralize('card', entry.get('questions').size, true)}
+            onPress={() => onOpenDeck(entry.get('uuid'))} />
+        ))
+      }
+    </List>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

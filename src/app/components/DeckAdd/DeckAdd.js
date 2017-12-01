@@ -7,7 +7,7 @@ class DeckAdd extends Component {
     title: '',
   }
 
-  handleChangeTitle = (value) => {
+  handleChangeTitle = (value, test) => {
     this.setState({
       title: value
     })
@@ -27,7 +27,6 @@ class DeckAdd extends Component {
             <FormLabel>Deck Title</FormLabel>
             <FormInput
               placeholder='Please enter deck title...'
-              name='title'
               value={this.state.title}
               onChangeText={this.handleChangeTitle} />
           </View>

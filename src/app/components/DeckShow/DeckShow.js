@@ -4,7 +4,7 @@ import { Button } from 'react-native-elements'
 import pluralize from 'pluralize'
 import { gray } from 'app/utils/colors'
 
-export default function DeckShow ({ deck, onAddCard, onShowQuiz }) {
+export default function DeckShow ({ deck, onAddCard, onShowQuiz, isPlayable }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -21,11 +21,17 @@ export default function DeckShow ({ deck, onAddCard, onShowQuiz }) {
           title={'Add Card'}
           backgroundColor="green"
           style={[styles.buttonAction, {marginBottom: 15}]} />
-        <Button
-          onPress={onShowQuiz}
-          title={'Show Quiz'}
-          backgroundColor="blue"
-          style={styles.buttonAction} />
+        {
+          isPlayable
+            ? (
+              <Button
+                onPress={onShowQuiz}
+                title={'Show Quiz'}
+                backgroundColor="blue"
+                style={styles.buttonAction} />
+            )
+            : null
+        }
       </View>
     </View>
   )

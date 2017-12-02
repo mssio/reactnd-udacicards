@@ -11,7 +11,6 @@ class MainContainer extends Component {
   }
 
   startLoading = async () => {
-    console.log('Loading started')
     await this.props.handleLoadDecks()
   }
 

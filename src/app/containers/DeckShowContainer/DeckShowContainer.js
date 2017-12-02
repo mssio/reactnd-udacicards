@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { startQuiz } from 'app/redux/actions/DeckActions'
 import { DeckShow } from 'app/components'
 
 class DeckShowContainer extends Component {
@@ -12,6 +14,8 @@ class DeckShowContainer extends Component {
 
   handleShowQuiz = () => {
     const { deck } = this.props.navigation.state.params
+
+    this.props.startQuiz(deck.get('uuid'))
     this.props.navigation.navigate('QuizShow', {
       deck,
       index: 0
@@ -19,8 +23,8 @@ class DeckShowContainer extends Component {
   }
 
   render () {
-  const { deck } = this.props.navigation.state.params
-  const isPlayable = deck.get('questions').size > 0
+    const { deck } = this.props.navigation.state.params
+    const isPlayable = deck.get('questions').size > 0
 
     return (
       <DeckShow
@@ -32,4 +36,4 @@ class DeckShowContainer extends Component {
   }
 }
 
-export default DeckShowContainer
+export default connect(null, {startQuiz})(DeckShowContainer)

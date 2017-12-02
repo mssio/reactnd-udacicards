@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {
+  guessCorrectAnswer,
+  guessIncorrectAnswer,
+} from 'app/redux/actions/DeckActions'
 import { QuizShow } from 'app/components'
 
 class QuizShowContainer extends Component {
@@ -6,8 +11,10 @@ class QuizShowContainer extends Component {
     const { deck, index } = this.props.navigation.state.params
     const isFinished = index === deck.get('questions').size - 1
 
+    this.props.guessCorrectAnswer(deck.get('uuid'), index)
+
     if (isFinished) {
-      this._handleShowResult(deck)
+      this._handleShowResult(deck.get('uuid'))
     } else {
       this._handleShowNext(deck, index)
     }
@@ -15,9 +22,11 @@ class QuizShowContainer extends Component {
   handleIncorrectGuess = () => {
     const { deck, index } = this.props.navigation.state.params
     const isFinished = index === deck.get('questions').size - 1
-    
+
+    this.props.guessIncorrectAnswer(deck.get('uuid'), index)
+
     if (isFinished) {
-      this._handleShowResult(deck)
+      this._handleShowResult(deck.get('uuid'))
     } else {
       this._handleShowNext(deck, index)
     }
@@ -30,9 +39,9 @@ class QuizShowContainer extends Component {
     })
   }
 
-  _handleShowResult = (deck) => {
+  _handleShowResult = (deckUuid) => {
     this.props.navigation.navigate('QuizResult', {
-      deck,
+      deckUuid,
     })
   }
 
@@ -52,4 +61,4 @@ class QuizShowContainer extends Component {
   }
 }
 
-export default QuizShowContainer
+export default connect(null, {guessCorrectAnswer, guessIncorrectAnswer})(QuizShowContainer)

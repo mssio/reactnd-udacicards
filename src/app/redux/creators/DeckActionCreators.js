@@ -14,12 +14,10 @@ export function handleLoadDecks () {
 
       if (decks === null) {
         // first open
-        console.log('First Open')
         await handlePersistDecks(JSON.stringify(initialDecks))
         dispatch(loadingDecksSuccess(initialDecks))
       } else {
         // next open
-        console.log('Next Open')
         dispatch(loadingDecksSuccess(JSON.parse(decks)))
       }
     } catch (err) {
@@ -40,12 +38,10 @@ const initialDecks = {
       {
         question: 'What is React?',
         answer: 'A library for managing user interfaces',
-        isCorrect: false,
       },
       {
         question: 'Where do you make Ajax requests in React?',
         answer: 'The componentDidMount lifecycle event',
-        isCorrect: false,
       }
     ]
   },
@@ -56,7 +52,6 @@ const initialDecks = {
       {
         question: 'What is a closure?',
         answer: 'The combination of a function and the lexical environment within which that function was declared.',
-        isCorrect: false,
       }
     ]
   }

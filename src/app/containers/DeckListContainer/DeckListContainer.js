@@ -1,22 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { DeckList } from 'app/components'
-import { data } from './tmp'
 
 class DeckListContainer extends Component {
   handleOpenDeck = (deckId) => {
-    console.log('Entry opened:', deckId)
     this.props.navigation.navigate('DeckShow', {
-      deck: data.get(deckId),
+      deck: this.props.decks.get(deckId),
     })
   }
 
   render () {
     return (
       <DeckList
-        data={data.valueSeq()}
+        data={this.props.decks.valueSeq()}
         onOpenDeck={this.handleOpenDeck} />
     )
   }
 }
 
-export default DeckListContainer
+function mapStateToProps ({ DeckReducer }) {
+  return {
+    decks: DeckReducer.get('decks'),
+  }
+}
+
+export default connect(mapStateToProps)(DeckListContainer)

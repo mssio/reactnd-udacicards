@@ -1,17 +1,17 @@
 import React from 'react'
+import { Provider } from 'react-redux'
 import { StyleSheet, View } from 'react-native'
+import store from 'app/redux/store'
 import { StatusBar } from 'app/components'
 import Navigation from 'app/navigation'
-
-console.log(Navigation)
+import { MainContainer } from 'app/containers'
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar />
-        <Navigation />
-      </View>
+      <Provider store={store}>
+        <MainContainer Navigation={Navigation}/>
+      </Provider>
     )
   }
 }

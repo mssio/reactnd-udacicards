@@ -1,3 +1,4 @@
+export { default as MainContainer } from './MainContainer/MainContainer'
 export { default as DeckListContainer } from './DeckListContainer/DeckListContainer'
 export { default as DeckAddContainer } from './DeckAddContainer/DeckAddContainer'
 export { default as DeckShowContainer } from './DeckShowContainer/DeckShowContainer'

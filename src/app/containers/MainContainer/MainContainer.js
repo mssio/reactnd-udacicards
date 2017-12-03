@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { AppLoading } from 'expo'
 import { connect } from 'react-redux'
+import { setLocalNotification } from 'app/utils/helpers'
 import { handleLoadDecks } from 'app/redux/creators/DeckActionCreators'
 import { StatusBar } from 'app/components'
 
 class MainContainer extends Component {
   state = {
     isReady: false,
+  }
+
+  componentDidMount () {
+    setLocalNotification()
   }
 
   startLoading = async () => {

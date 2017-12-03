@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { clearLocalNotification, setLocalNotification } from 'app/utils/helpers'
 import { startQuiz } from 'app/redux/actions/DeckActions'
 import { QuizResult } from 'app/components'
 
 class QuizResultContainer extends Component {
+  componentDidMount () {
+    clearLocalNotification()
+    setLocalNotification(true)
+  }
+
   handleStartOver = () => {
     this.props.startQuiz(this.props.deck.get('uuid'))
     this.props.navigation.navigate('QuizShow', {

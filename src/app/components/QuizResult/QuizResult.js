@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { green } from 'app/utils/colors'
 
-export default function QuizResult ({ title, score, maxScore, onGoHome }) {
+export default function QuizResult ({ title, score, maxScore, onStartOver, onBackToDeck }) {
   return (
     <View style={styles.container}>
       <View style={styles.captionContainer}>
@@ -18,9 +18,14 @@ export default function QuizResult ({ title, score, maxScore, onGoHome }) {
       </View>
       <View style={styles.actionContainer}>
         <Button
-          onPress={onGoHome}
-          title={'Go Home'}
+          onPress={onStartOver}
+          title={'Restart Quiz'}
           backgroundColor="blue"
+          style={[styles.buttonAction, { marginBottom: 15 }]} />
+        <Button
+          onPress={onBackToDeck}
+          title={'Back to Deck'}
+          backgroundColor="orange"
           style={styles.buttonAction} />
       </View>
     </View>

@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { startQuiz } from 'app/redux/actions/DeckActions'
 import { QuizResult } from 'app/components'
 
 class QuizResultContainer extends Component {
-  handleGoHome = () => {
+  handleStartOver = () => {
+    this.props.startQuiz(this.props.deck.get('uuid'))
+    this.props.navigation.navigate('QuizShow', {
+      deck: this.props.deck,
+      index: 0
+    })
+  }
+  handleBackToDeck = () => {
     this.props.navigation.navigate('DeckList')
+    this.props.navigation.navigate('DeckShow', {
+      deckUuid: this.props.deck.get('uuid'),
+      title: this.props.deck.get('title'),
+    })
   }
 
   render () {
@@ -23,7 +35,8 @@ class QuizResultContainer extends Component {
         title={title}
         score={score}
         maxScore={maxScore}
-        onGoHome={this.handleGoHome} />
+        onStartOver={this.handleStartOver}
+        onBackToDeck={this.handleBackToDeck} />
     )
   }
 }
@@ -34,4 +47,4 @@ function mapStateToProps ({ DeckReducer }, props) {
   }
 }
 
-export default connect(mapStateToProps)(QuizResultContainer)
+export default connect(mapStateToProps, {startQuiz})(QuizResultContainer)

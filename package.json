@@ -1,6 +1,7 @@
 {
   "name": "mobile-flashcards",
   "version": "1.0.0",
+  "private": true,
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.0.0",
     "jest-expo": "23.0.0",

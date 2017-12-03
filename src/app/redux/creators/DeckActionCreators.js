@@ -28,7 +28,6 @@ export function handleLoadDecks () {
       } else {
         // next open
         dispatch(loadingDecksSuccess(JSON.parse(decks)))
-        console.log(JSON.parse(decks))
       }
     } catch (err) {
       dispatch(loadingDecksError(err))

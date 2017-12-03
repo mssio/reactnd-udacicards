@@ -49,7 +49,7 @@ class CardAdd extends Component {
             onPress={this.handleSubmit}
             title={'Submit'}
             backgroundColor="green"
-            style={styles.buttonAction} />
+            buttonStyle={styles.buttonAction} />
         </View>
       </View>
     )

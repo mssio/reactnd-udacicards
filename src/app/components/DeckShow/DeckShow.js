@@ -20,7 +20,7 @@ export default function DeckShow ({ deck, onAddCard, onShowQuiz, isPlayable }) 
           onPress={onAddCard}
           title={'Add Card'}
           backgroundColor="green"
-          style={[styles.buttonAction, {marginBottom: 15}]} />
+          buttonStyle={[styles.buttonAction, {marginBottom: 15}]} />
         {
           isPlayable
             ? (
@@ -28,7 +28,7 @@ export default function DeckShow ({ deck, onAddCard, onShowQuiz, isPlayable }) 
                 onPress={onShowQuiz}
                 title={'Show Quiz'}
                 backgroundColor="blue"
-                style={styles.buttonAction} />
+                buttonStyle={styles.buttonAction} />
             )
             : null
         }

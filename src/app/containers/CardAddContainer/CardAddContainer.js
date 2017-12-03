@@ -5,6 +5,10 @@ import { handleCreateCard } from 'app/redux/creators/DeckActionCreators'
 import { CardAdd } from 'app/components'
 
 class CardAddContainer extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Add Card',
+  })
+
   handleSubmitCard = async (card) => {
     const { deckUuid } = this.props.navigation.state.params
     await this.props.handleCreateCard(deckUuid, card)

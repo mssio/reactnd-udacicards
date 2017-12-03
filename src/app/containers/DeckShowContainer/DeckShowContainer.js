@@ -5,30 +5,29 @@ import { DeckShow } from 'app/components'
 
 class DeckShowContainer extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.deck.get('title'),
+    title: navigation.state.params.title,
   })
 
   handleAddCard = () => {
-    this.props.navigation.navigate('CardAdd')
+    this.props.navigation.navigate('CardAdd', {
+      deckUuid: this.props.deck.get('uuid'),
+    })
   }
 
   handleShowQuiz = () => {
-    const { deck } = this.props.navigation.state.params
-
-    this.props.startQuiz(deck.get('uuid'))
+    this.props.startQuiz(this.props.deck.get('uuid'))
     this.props.navigation.navigate('QuizShow', {
-      deck,
+      deck: this.props.deck,
       index: 0
     })
   }
 
   render () {
-    const { deck } = this.props.navigation.state.params
-    const isPlayable = deck.get('questions').size > 0
+    const isPlayable = this.props.deck.get('questions').size > 0
 
     return (
       <DeckShow
-        deck={deck}
+        deck={this.props.deck}
         onAddCard={this.handleAddCard}
         onShowQuiz={this.handleShowQuiz}
         isPlayable={isPlayable} />
@@ -36,4 +35,10 @@ class DeckShowContainer extends Component {
   }
 }
 
-export default connect(null, {startQuiz})(DeckShowContainer)
+function mapStateToProps ({DeckReducer}, props) {
+  return {
+    deck: DeckReducer.get('decks').get(props.navigation.state.params.deckUuid)
+  }
+}
+
+export default connect(mapStateToProps, {startQuiz})(DeckShowContainer)

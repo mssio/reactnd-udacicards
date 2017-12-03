@@ -1,6 +1,15 @@
+import { fromJS } from 'immutable'
 import {
   loadingDecksSuccess,
   loadingDecksError,
+  creatingDeck,
+  creatingDeckSuccess,
+  creatingDeckCompleted,
+  creatingDeckError,
+  creatingCard,
+  creatingCardSuccess,
+  creatingCardCompleted,
+  creatingCardError,
 } from '../actions/DeckActions'
 import {
   svcLoadDecks,
@@ -14,11 +23,12 @@ export function handleLoadDecks () {
 
       if (decks === null) {
         // first open
-        await handlePersistDecks(JSON.stringify(initialDecks))
+        await handlePersistDecks(initialDecks)
         dispatch(loadingDecksSuccess(initialDecks))
       } else {
         // next open
         dispatch(loadingDecksSuccess(JSON.parse(decks)))
+        console.log(JSON.parse(decks))
       }
     } catch (err) {
       dispatch(loadingDecksError(err))
@@ -26,8 +36,36 @@ export function handleLoadDecks () {
   }
 }
 
-export async function handlePersistDecks (decks) {
-  return svcSaveDecks(decks)
+export function handleCreateDeck (deck) {
+  return async function (dispatch, getState) {
+    dispatch(creatingDeck())
+
+    try {
+      dispatch(creatingDeckSuccess(fromJS(deck)))
+      await handlePersistDecks(getState().DeckReducer.get('decks'))
+      dispatch(creatingDeckCompleted())
+    } catch (err) {
+      dispatch(creatingDeckError(err))
+    }
+  }
+}
+
+export function handleCreateCard (deckUuid, card) {
+  return async function (dispatch, getState) {
+    dispatch(creatingCard())
+
+    try {
+      dispatch(creatingCardSuccess(deckUuid, fromJS(card)))
+      await handlePersistDecks(getState().DeckReducer.get('decks'))
+      dispatch(creatingCardCompleted())
+    } catch (err) {
+      dispatch(creatingCardError(err))
+    }
+  }
+}
+
+function handlePersistDecks (decks) {
+  return svcSaveDecks(JSON.stringify(decks))
 }
 
 const initialDecks = {

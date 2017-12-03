@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { DeckList } from 'app/components'
 
 class DeckListContainer extends Component {
-  handleOpenDeck = (deckId) => {
+  handleOpenDeck = (deckUuid) => {
     this.props.navigation.navigate('DeckShow', {
-      deck: this.props.decks.get(deckId),
+      deckUuid,
+      title: this.props.decks.get(deckUuid).get('title'),
     })
   }
 

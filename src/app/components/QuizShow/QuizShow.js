@@ -59,12 +59,12 @@ class QuizShow extends Component {
             onPress={onCorrectGuess}
             title={'Correct'}
             backgroundColor="green"
-            style={[styles.buttonAction, { marginBottom: 15 }]} />
+            buttonStyle={[styles.buttonAction, { marginBottom: 15 }]} />
           <Button
             onPress={onIncorrectGuess}
             title={'Incorrect'}
             backgroundColor="red"
-            style={styles.buttonAction} />
+            buttonStyle={styles.buttonAction} />
         </View>
       </View>
     )

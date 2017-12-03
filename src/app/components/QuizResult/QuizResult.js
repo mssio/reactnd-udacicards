@@ -21,12 +21,12 @@ export default function QuizResult ({ title, score, maxScore, onStartOver, onBa
           onPress={onStartOver}
           title={'Restart Quiz'}
           backgroundColor="blue"
-          style={[styles.buttonAction, { marginBottom: 15 }]} />
+          buttonStyle={[styles.buttonAction, { marginBottom: 15 }]} />
         <Button
           onPress={onBackToDeck}
           title={'Back to Deck'}
           backgroundColor="orange"
-          style={styles.buttonAction} />
+          buttonStyle={styles.buttonAction} />
       </View>
     </View>
   )

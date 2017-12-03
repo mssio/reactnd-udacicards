@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { KeyboardAvoidingView, View, Text, StyleSheet } from 'react-native'
 import { FormLabel, FormInput, Button } from 'react-native-elements'
 
 class DeckAdd extends Component {
@@ -19,7 +19,7 @@ class DeckAdd extends Component {
 
   render () {
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior="padding">
           <View style={styles.textContainer}>
             <Text style={styles.titleText}>{'What is the title of your new deck?'}</Text>
           </View>
@@ -37,7 +37,7 @@ class DeckAdd extends Component {
               backgroundColor="green"
               style={styles.buttonAction} />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       )
   }
 }
